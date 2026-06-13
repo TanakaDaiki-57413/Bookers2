@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   # アソシエーション設定
-  how_many :books, dependent: :destroy
+  has_many :books, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
