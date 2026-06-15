@@ -48,30 +48,58 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-6 me-4">
-              <li class="nav-item me-4">
-                <%= link_to root_path,class:"text-decoration-none link-light " do%>
-                 <i class="fa-solid fa-house"></i>
-                 <span>Home</span>
-                <%end%>
-              </li>
-              <li class="nav-item me-4">
-                <%= link_to about_path,class:"text-decoration-none link-light" do%>
-                  <i class="fa-solid fa-link"></i>
-                  <span>About</span>
-                <%end%>
-              </li>
-              <li class="nav-item me-4">
-                <%= link_to new_user_path,class:" text-decoration-none link-light " do%>
-                  <i class="fa-solid fa-user-plus"></i>
-                  <span>Sign up</span>
-                <%end%>
-              </li>
-              <li class="nav-item me-4">
-                <%= link_to users_sign_in_path,class:"text-decoration-none link-light" do%>
-                  <i class="fa-solid fa-right-to-bracket"></i>
-                  <span>Log in</span>
-                <%end%> 
-              </li>
+              
+              <% if authenticated? %>
+                <li class="nav-item me-4">
+                  <%= link_to user_path(Current.user.id),class:"text-decoration-none link-light " do%>
+                   <i class="fa-solid fa-house"></i>
+                   <span>Home</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to users_path,class:"text-decoration-none link-light" do%>
+                    <i class="fa-solid fa-users"></i>
+                    <span>Users</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to books_path,class:" text-decoration-none link-light " do%>
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Books</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to session_path ,data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },class:"text-decoration-none link-light" do%>
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Log out</span>
+                  <%end%> 
+                </li>                
+              <%else%>
+                <li class="nav-item me-4">
+                  <%= link_to root_path,class:"text-decoration-none link-light " do%>
+                   <i class="fa-solid fa-house"></i>
+                   <span>Home</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to about_path,class:"text-decoration-none link-light" do%>
+                    <i class="fa-solid fa-link"></i>
+                    <span>About</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to new_user_path,class:" text-decoration-none link-light " do%>
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Sign up</span>
+                  <%end%>
+                </li>
+                <li class="nav-item me-4">
+                  <%= link_to users_sign_in_path,class:"text-decoration-none link-light" do%>
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Log in</span>
+                  <%end%> 
+                </li>
+              <%end%>
           </div>
 
         </div>

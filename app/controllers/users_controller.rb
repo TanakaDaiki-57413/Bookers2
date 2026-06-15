@@ -17,10 +17,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
-    # 
-    # redirect_to ユーザー詳細ページへ 
-    redirect_to root_path
+    if @user.save
+      start_new_session_for @user
+      redirect_to after_authentication_url(@user)
+    else
+      redirect_to root_path
+    end
   end
 
   private
