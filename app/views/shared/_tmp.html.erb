@@ -1,0 +1,34 @@
+<%# 画面左側 %>
+<div class="col-md-3 mt-3">
+  <%# ユーザーインフォ %>
+  <div class="row ">
+    <h2>User info</h2>
+    <div class="img">
+      <%= image_tag @user.get_profile_image(100,100)%>
+    </div>
+    <div class="col">
+      <p>name</p>
+      <p>introduction</p>
+    </div>
+    <div class="col">
+      <%= @user.name%>
+      <%= @user.introduction%>
+    </div>
+  </div>
+  <div class="row">
+    <%= link_to edit_user_path(@user.id),class:"btn btn-outline-secondary" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  </div>
+  <%# NewBook %>
+  <div class="row mt-3">
+    <h2>New book</h2>
+    <%= form_with model:@book ,url:books_path  do |f|%>
+      <%=f.label :Title %><br>
+      <%=f.text_field :title ,class:"form-control"%><br>
+      <%=f.label :Opinion %><br>
+      <%=f.text_area :body ,class:"form-control "%><br>
+      <%=f.submit "Create Book",class:"btn btn-success fs-7"%>
+    <%end%>
+  </div>
+</div>

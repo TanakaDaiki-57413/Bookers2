@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resources :users, only: [:new,:index,:show,:edit,:create],path_names: { new: 'sign_up' }
-  resources :books, only: [:index,:show,:edit]
+  resources :books
   
   get "up" => "rails/health#show", as: :rails_health_check
 end

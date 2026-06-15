@@ -1,2 +1,11 @@
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<<main>
+  <div class="container px-3">
+    <div class="row">
+      <%= render "shared/tmp",book: @book,user: @user%>
+      <%# <画面右側> %>
+      <div class="col-md-8 offset-md-1 bg-danger">
+        <p>edit</p>
+      </div>
+    </div>
+  </div>
+</main>
