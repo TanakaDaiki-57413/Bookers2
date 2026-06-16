@@ -1,6 +1,16 @@
 <main>
   <div class="container px-5">
     <div class="row">
+      <% if @book.errors.any? %>
+
+        <h1><%= @book.errors.count %> errors prohibited this obj from being saved:</h1>
+
+        <ul class="ms-5">
+          <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <%end%>
+        </ul>
+      <% end %>
       <%= render "shared/tmp",new_book: @new_book,user: @user%>
       <%# <画面右側> %>
       <div class="col-md-8 offset-md-1 mt-3">

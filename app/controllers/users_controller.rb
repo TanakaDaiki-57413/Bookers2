@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: [:new,:create] 
 
   def new
-    @new_book = Book.new
     @user = User.new
   end
 
@@ -30,15 +29,20 @@ class UsersController < ApplicationController
       flash[:notice] = "Welcome! You have signed up successfully."
       redirect_to after_authentication_url(@user)
     else
-      redirect_to root_path
+      render:new,status: :unprocessable_entity
     end
   end
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    flash[:notice] = "You have updated user successfully."
-    redirect_to user_path(user)
+    if user.update(user_params)
+      flash[:notice] = "You have updated user successfully."
+      redirect_to user_path(user)
+    else
+      @user = user
+      render:edit, status: :unprocessable_entity
+    end
+    
   end
 
   private

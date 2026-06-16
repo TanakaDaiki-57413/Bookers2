@@ -1,5 +1,14 @@
-<div class="width-85 mx-auto">
+<div class="col-md-9 mx-auto">
   <h1 class="mt-3">Sign up</h1>
+  <% if @user.errors.any? %>
+    <h1><%= @user.errors.count %> errors prohibited this obj from being saved:</h1>
+    <ul class="ms-3">
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <%end%>
+    </ul>
+  <% end %>
+
 
   <%= form_with model: @user, url: users_path do |f| %>
   
@@ -8,7 +17,7 @@
     <%= f.label :Email ,class:"fs-5 mb-1"%><br>
     <%= f.email_field :email_address ,class:"input-op1 px-1 py-1"%><br>
     <%= f.label :password ,class:"fs-5 mb-1"%>
-    <span class="fs-5">(6 characters minimum)</span><br>
+    <span class="fs-6">(6 characters minimum)</span><br>
     <%= f.password_field :password ,class:"input-op1 px-1 py-1"%><br>
     <%= f.label :password_confirmation ,class:"fs-5 mb-1"%><br>
     <%= f.password_field :password_confirmation ,class:"input-op1 px-1 py-1"%>
