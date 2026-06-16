@@ -1,11 +1,30 @@
-<<main>
-  <div class="container px-5">
-    <div class="row">
-      <%= render "shared/tmp",new_book: @new_book,user: @user%>
-      <%# <画面右側> %>
-      <div class="col-md-8 offset-md-1 bg-danger">
-        <p>edit</p>
-      </div>
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-4">
+
+      <h1 class="mt-3 mb-4">Editing Book</h1>
+
+      <%= form_with model: @book  do |f| %>
+
+        <div class="mb-3">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :opinion %>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+
+        <%= f.submit "Update Book", class: "btn btn-success" %>
+
+      <% end %>
+      <%=link_to "Show",book_path(@book)%>
+      <strong>|</strong>
+      <%=link_to "Back",books_path%>
+
     </div>
   </div>
-</main>
+</div>
