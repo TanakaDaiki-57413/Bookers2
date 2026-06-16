@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
   def create
     if user = User.authenticate_by(params.permit(:name, :password))
       start_new_session_for user
-      user = Current.user
-      redirect_to after_authentication_url(user)
+      @user = Current.user
+      flash[:notice] = "Signed in successfully."
+      redirect_to after_authentication_url(@user)
     else
       redirect_to users_sign_in_path, alert: "Try another name or password."
     end
@@ -17,6 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
+    flash[:notice]= "Signed out successfully."
     redirect_to root_path, status: :see_other
   end
 end
