@@ -3,17 +3,18 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: [:new,:create] 
 
   def new
+    @new_book = Book.new
     @user = User.new
   end
 
   def index
+    @new_book = Book.new
     @user = Current.user
-    @book = Book.new
   end
 
   def show
+    @new_book = Book.new
     @user = Current.user
-    @book = Book.new
   end
 
   def edit

@@ -23,7 +23,7 @@
   <%# NewBook %>
   <div class="row mt-3">
     <h2>New book</h2>
-    <%= form_with model:@book ,url:books_path  do |f|%>
+    <%= form_with model:@new_book ,url:books_path  do |f|%>
       <%=f.label :Title %><br>
       <%=f.text_field :title ,class:"form-control"%><br>
       <%=f.label :Opinion %><br>

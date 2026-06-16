@@ -1,16 +1,29 @@
 class BooksController < ApplicationController
   def index
-    @book = Book.new
+    @new_book = Book.new
+    @books = Book.all
     @user = Current.user
   end
 
   def show
+    @new_book = Book.new
+    @book = Book.find(params[:id])
+    @user = Current.user
   end
 
   def edit
   end
 
   def create
+    @book = Current.user.books.new(book_params)
+    @book.save
+    redirect_to book_path(@book.id)
+  end
+
+  private
+
+  def book_params
+    params.require(:book).permit(:title, :body)
   end
 
 end
