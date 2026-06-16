@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def create
@@ -32,10 +33,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(user_params)
+    redirect_to user_path(user)
+  end
+
   private
  
   def user_params
     # name, email_address, password, password_confirmation を許可
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :profile_image)  
+    params.require(:user).permit(:name,:introduction, :email_address, :password, :password_confirmation, :profile_image)  
   end
 end
