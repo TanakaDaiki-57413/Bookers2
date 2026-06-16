@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
 
   #ログアウト後の遷移
   def after_logout_url
-    about_path
+    root_path
   end
 end

@@ -19,7 +19,7 @@
         <%= link_to "Log in" ,user_path(Current.user), class:"btn btn-primary"%>
         <%= link_to "Sign up",user_path(Current.user),class:"btn btn-success mt-4" %>
       <%else%>
-        <%= link_to "Log in" ,users_sign_in_path, class:"btn btn-primary"%>
+        <%= link_to "Log in" ,new_session_path, class:"btn btn-primary"%>
         <%= link_to "Sign up",new_user_path,class:"btn btn-success mt-4" %>
       <%end%>
   </div>

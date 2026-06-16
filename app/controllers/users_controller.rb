@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # 認証をスキップ: サインアップ（new, create）はログイン前に行うため
   allow_unauthenticated_access only: [:new,:create] 
   before_action :is_matching_login_user, only: [:edit, :update]
 

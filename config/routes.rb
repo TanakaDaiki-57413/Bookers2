@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
 
   root to: "homes#top"
-  get "/about" => "homes#about"
-  get "/users/sign_in" => "sessions#new" 
+  get "/home/about" => "homes#about"
+  # 下記コード記載するとRspecエラーになるのでコメント化
+  # get "users/sign_in", to: "sessions#new", as: :new_session
 
-  resource :session, only: [:edit,:show,:update,:destroy,:create]
+  resource :session
   resources :passwords, param: :token
 
-  resources :users, only: [:new,:index,:show,:edit,:create,:update,:destroy],path_names: { new: 'sign_up' }
+  resources :users ,path_names: { new: 'sign_up' }
   resources :books
   
   get "up" => "rails/health#show", as: :rails_health_check

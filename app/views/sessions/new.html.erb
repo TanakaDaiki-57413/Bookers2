@@ -6,6 +6,8 @@
     <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username", value: params[:name] ,class:"input-op1 px-1 py-1"%><br>
     <%= form.label :password ,class:"fs-5 mb-1" %><br>
     <%= form.password_field :password, required: true, autocomplete: "current-password",  maxlength: 72 ,class:"input-op1 px-1 py-1" %><br>
+    <%= form.check_box :remember_me %>
+    <%= form.label :remember_me, "Remember me" %>
     <div class="mt-2">
       <%= form.submit "Log in" ,class:"btn btn-primary fs-7"%>
     </div>
