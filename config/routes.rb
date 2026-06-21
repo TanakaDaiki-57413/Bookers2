@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resources :users ,path_names: { new: 'sign_up' }
-  resources :books
-  
+  resources :books do
+    resource :favorite, only: [:create,:destroy]
+  end
   get "up" => "rails/health#show", as: :rails_health_check
 end

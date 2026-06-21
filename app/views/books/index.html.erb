@@ -20,8 +20,8 @@
             <tr>
               <th class="col-md-2"></th>
               <th class="col-md-3">Title</th>
-              <th class="col-md-6">Opinion</th>
-              <th class="col-md-1 border-none"></th>
+              <th class="col-md-3">Opinion</th>
+              <th class="col-md-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +35,23 @@
                 </td>
                 <td><%=link_to book.title,book_path(book.id)%></td>
                 <td><%=book.body%></td>
+                
+                <% if book.favorited_by?(Current.user)%>
+                  <td>
+                    <%= link_to book_favorite_path(book),data: {turbo_method: :delete},class:"text-decoration-none" do %>
+                      <span class="text-danger">♥</span>
+                      <%= book.favorites.count%>
+                    <%end%>
+                  </td>
+                  
+                <%else%>
+                  <td>
+                    <%= link_to book_favorite_path(book),data: {turbo_method: "post"},class:"text-decoration-none" do%>
+                      <span class="text-primary">♥</span>
+                      <%= book.favorites.count %>
+                    <%end%>
+                  </td>
+                <%end%>
               </tr>
             <%end%>
             <tr>

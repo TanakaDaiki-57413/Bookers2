@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   # アソシエーション設定
   has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
