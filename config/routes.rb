@@ -8,7 +8,14 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
-  resources :users ,path_names: { new: 'sign_up' }
+  resources :users ,path_names: { new: 'sign_up' } do
+    resource :relationships, only: [:create,:destroy]
+  end
+
+  get "/users/:id/follow_list", to: "users#follow_list", as: :follow_list
+  get "/users/:id/follower_list", to: "users#follower_list", as: :follower_list
+
+
   resources :books do
     resource :favorite, only: [:create,:destroy]
     resources :book_comments, only: [:create,:destroy]

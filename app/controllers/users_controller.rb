@@ -42,7 +42,16 @@ class UsersController < ApplicationController
       @user = user
       render:edit, status: :unprocessable_entity
     end
-    
+  end
+
+  def follow_list
+    user = User.find(params[:id])
+    @follow_list =  user.followings
+  end
+
+  def follower_list
+    user = User.find(params[:id])
+    @follower_list = user.followers
   end
 
   private

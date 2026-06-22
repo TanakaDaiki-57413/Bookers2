@@ -8,20 +8,42 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="col-md-3">image</th>
-              <th class="col-md-3">name</th>
-              <th class="col-md-5"></th>
-              <th class="col-md-1 border-none"></th>
+              <th class="col-md-2">image</th>
+              <th class="col-md-2">name</th>
+              <th class="col-md-3"></th>
+              <th class="col-md-3"></th>
+              <th class="col-md-2"></th>
             </tr>
           </thead>
           <tbody>
             <% @users.each do |user| %>
               <tr>
                 <td>
-                  <%= image_tag user.get_profile_image(80, 80) %>
-    
+                  <%= image_tag user.get_profile_image(50, 50) %>
                 </td>
                 <td><%= user.name %></td>
+                <%# フォロー数 %>
+                <td>
+                  フォロー数<%= user.followings.count %>
+                </td>
+                <%# フォロワー数 %>
+                <td>
+                  フォロワー数<%= user.followers.count%>
+                </td>
+                <%# フォロー機能 %>
+                <td>
+                  <% if Current.user != user %>
+                    <% if Current.user.following?(user) %>
+                      <%= link_to user_relationships_path(user.id), data:{turbo_method: :delete} do %>
+                        フォローを外す
+                      <% end %>
+                    <% else %>
+                      <%= link_to user_relationships_path(user.id), data:{turbo_method: :post} do %>
+                        フォローする
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
                 <td class="text-center"><%= link_to "Show",user_path(user)%></td>
               </tr>
             <%end%>
