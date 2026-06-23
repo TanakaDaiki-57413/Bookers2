@@ -1,0 +1,39 @@
+<h1><%=@object%> Search for <%=@keyword%></h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>
+        <%if @object == "Users"%>
+          Name
+        <%elsif @object == "Books" %>
+          Title
+        <%end%>
+      </th>
+      <th>
+        <%if @object == "Users"%>
+          Introduction
+        <%elsif @object == "Books" %>
+          Opinion
+        <%end%>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @q.each do |q| %>
+      <tr>
+        <%if @object == "Users"%>
+          <td><%=image_tag q.get_profile_image(50,50)%></td>
+          <td><%=q.name%></td>
+          <td><%=q.introduction%></td>
+        <%elsif @object == "Books" %>
+          <td><%=image_tag q.user.get_profile_image(50,50)%></td>
+          <td><%=q.title%></td>
+          <td><%=q.body%></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

@@ -109,6 +109,7 @@
     <% flash.each do |message_type, message| %>
       <%= message %>
     <% end %>
+    <div class="text-center mt-3"><%=render "shared/form"%></div>
     <%= yield %>
 
     <footer>

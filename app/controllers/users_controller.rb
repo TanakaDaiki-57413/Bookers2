@@ -67,4 +67,6 @@ class UsersController < ApplicationController
       redirect_to user_path(Current.user)
     end
   end
+
+
 end
