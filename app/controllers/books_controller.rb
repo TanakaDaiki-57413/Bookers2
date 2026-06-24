@@ -2,7 +2,6 @@ class BooksController < ApplicationController
   before_action :is_matching_book, only: [:edit, :update]
   def index
     @new_book = Book.new
-    @book = Book.new
     @books = Book.all
     @user = Current.user
   end
@@ -19,13 +18,12 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Current.user.books.new(book_params)
+    @new_book = Current.user.books.new(book_params)
     
-    if @book.save
+    if @new_book.save
       flash[:notice] = "You have created book successfully."
-      redirect_to book_path(@book.id)
+      redirect_to book_path(@new_book.id)
     else
-      @new_book = Book.new
       @user = Current.user
       @books = Book.all
       render:index,status: :unprocessable_entity
