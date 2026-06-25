@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "destroy_book_comments#{@subject_comment.id}" do %>
+  
+  <%= render "book_comments/book_comments_list", book: @book %>
+
+<% end %>

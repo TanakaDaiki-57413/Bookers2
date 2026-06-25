@@ -1,11 +1,11 @@
 <div id="favorite_btn_<%= book.id %>">
   <% if book.favorited_by?(Current.user)%>
     <%=form_with model:book, url:book_favorite_path(book),method: :delete do |f|%>
-      <%=f.submit "いいね解除"%>
+      <%=f.submit "♥#{book.favorites.count}", class:"text-danger border-0"%>
     <%end%>
   <% else %>
     <%=form_with model:book, url:book_favorite_path(book),method: :post do |f|%>
-      <%=f.submit "いいね"%>
+      <%=f.submit "♥#{book.favorites.count}",class:"text-primary border-0"%>
     <%end%>
   <% end %>
 </div>
