@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :is_matching_book, only: [:edit, :update]
   def index
     @new_book = Book.new
-    @books = Book.all
+    @books = Book.popular_in_last_week
     @user = Current.user
   end
 

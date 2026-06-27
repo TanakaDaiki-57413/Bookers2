@@ -8,6 +8,14 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :body, length: { maximum: 200 },presence:true
 
+  scope :popular_in_last_week, -> {
+    left_joins(:favorites) # Bookと「いいね」を結びつけて「いいね」の情報を取り出す
+      .where('favorites.created_at >= ?', 1.week.ago) #過去1週間の「いいね」だけを対象にする
+      .group('books.id') # 各Bookごとに「いいね」をまとめる
+      .order('COUNT(favorites.id) DESC') # 「いいね」の数が多い順に並び替える
+  }
+  
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
