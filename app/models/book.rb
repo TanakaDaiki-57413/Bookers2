@@ -11,6 +11,10 @@ class Book < ApplicationRecord
   scope :popular_in_last_week, -> {
     left_joins(:favorites) # Bookと「いいね」を結びつけて「いいね」の情報を取り出す
       .where('favorites.created_at >= ?', 1.week.ago) #過去1週間の「いいね」だけを対象にする
+      .or(
+      Book.left_joins(:favorites)
+          .where(favorites: { id: nil })
+      )
       .group('books.id') # 各Bookごとに「いいね」をまとめる
       .order('COUNT(favorites.id) DESC') # 「いいね」の数が多い順に並び替える
   }
