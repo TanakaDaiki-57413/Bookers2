@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "/users/:id/follow_list", to: "users#follow_list", as: :follow_list
   get "/users/:id/follower_list", to: "users#follower_list", as: :follower_list
 
+  post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
+
 
   resources :books do
     resource :favorite, only: [:create,:destroy]

@@ -35,10 +35,11 @@
   </div>
   <div class="row">
     <% if Current.user == @user%>
-
-      <%= link_to edit_user_path(@user.id),class:"btn btn-outline-secondary" do %>
-        <i class="fas fa-user-cog"></i>
-      <% end %>
+      <% unless @user.guest_user? %>
+        <%= link_to edit_user_path(@user.id),class:"btn btn-outline-secondary" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      <%end%>
 
     <%else%>
 
