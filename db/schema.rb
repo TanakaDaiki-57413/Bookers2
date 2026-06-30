@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_22_044524) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_073155) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -58,6 +58,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_22_044524) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "message"
+    t.integer "room_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["room_id"], name: "index_chats_on_room_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "book_id"
     t.datetime "created_at", null: false
@@ -74,6 +84,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_22_044524) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -81,6 +96,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_22_044524) do
     t.string "user_agent"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "user_rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "room_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,7 +122,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_22_044524) do
   add_foreign_key "book_comments", "books"
   add_foreign_key "book_comments", "users"
   add_foreign_key "books", "users"
+  add_foreign_key "chats", "rooms"
+  add_foreign_key "chats", "users"
   add_foreign_key "favorites", "books"
   add_foreign_key "favorites", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_rooms", "rooms"
+  add_foreign_key "user_rooms", "users"
 end

@@ -1,0 +1,32 @@
+<h2 id="room" data-room="<%= @room.id %>" data-user="<%= Current.user.id %>"><%= @user.name %> さんとのチャット</h2>
+
+<div class="message" style="width: 400px;">
+  <% @chats.each do |chat| %>
+    <%binding.break%>
+    <% if chat.user_id == Current.user.id %>
+      <%= render "chats/chat", chat: chat %>
+    <% else %>
+      <div class="left-container d-flex">
+        <%= image_tag @user.get_profile_image(30,30), style: 'border-radius: 50%' %>
+        <p class=ml-1 style="text-align: left;"><span style="background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><%= chat.message %></span></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="errors">
+  <% if @chat.errors.any? %>
+    <h1><%= @chat.errors.count %> errors prohibited this obj from being saved:</h1>
+    <ul class="ms-3">
+      <% @chat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <%end%>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with model: @chat, data: {remote: true} do |f| %>
+  <%= f.text_field :message %>
+  <%= f.submit "送信", class: "btn btn-dark btn-sm" %>
+  <%= f.hidden_field :room_id %>
+<% end %>

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "chat_#{@chat.id}" do %>
+  <%= render "chats/chat", chat: @chat %>
+<% end %>

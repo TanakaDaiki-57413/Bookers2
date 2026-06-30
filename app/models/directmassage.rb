@@ -1,0 +1,2 @@
+class Directmassage < ApplicationRecord
+end

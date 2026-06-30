@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # 下記コード記載するとRspecエラーになるのでコメント化
   # get "users/sign_in", to: "sessions#new", as: :new_session
 
+  resources :chats, only: [:show, :create, :destroy]
   resource :session
   resources :passwords, param: :token
 
