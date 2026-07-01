@@ -29,11 +29,21 @@ class ChatsController < ApplicationController
     @chat = Current.user.chats.new(chat_params)
 
     @chat.save
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to request.referrer }
+    end
   end
 
   def destroy
     @chat = Current.user.chats.find(params[:id])
     @chat.destroy
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to request.referrer }
+    end
   end
 
   private
