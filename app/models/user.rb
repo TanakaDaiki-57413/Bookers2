@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :chats,dependent: :destroy
   has_many :room,through: :user_rooms
 
+  has_many :notifications, dependent: :destroy
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   has_one_attached :profile_image

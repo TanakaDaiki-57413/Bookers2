@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   belongs_to :user
 
   has_many :favorites, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :book_comments,dependent: :destroy
 
   validates :title, presence: true
@@ -18,7 +19,12 @@ class Book < ApplicationRecord
       .group('books.id') # 各Bookごとに「いいね」をまとめる
       .order('COUNT(favorites.id) DESC') # 「いいね」の数が多い順に並び替える
   }
-  
+
+  after_create do
+    user.followers.each do |follower|
+      notifications.create(user_id: follower.id)
+    end
+  end  
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
