@@ -1,2 +1,0 @@
-class Directmassage < ApplicationRecord
-end

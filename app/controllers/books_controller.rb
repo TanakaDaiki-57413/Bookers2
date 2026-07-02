@@ -4,6 +4,15 @@ class BooksController < ApplicationController
     @new_book = Book.new
     @books = Book.popular_in_last_week
     @user = Current.user
+    
+    @books.each do |book|
+      if book.view_counts.empty?
+        book.view_counts.add_count_view(book)
+      else
+        book.view_counts.count_up_view(book)
+      end
+    end
+
   end
 
   def show
@@ -11,6 +20,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book_comment = BookComment.new
     @user = @book.user
+
+    if @book.view_counts.empty?
+      @book.view_counts.add_count_view(@book)
+    else
+      @book.view_counts.count_up_view(@book)
+    end
   end
 
   def edit

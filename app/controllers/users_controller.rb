@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     @new_book = Book.new
     @user = User.find(params[:id])
     @books = Book.where(user_id: @user.id)
+
+    @books.each do |book|
+      if book.view_counts.empty?
+        book.view_counts.add_count_view(book)
+      else
+        book.view_counts.count_up_view(book)
+      end
+    end
   end
 
   def edit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_01_123129) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_02_050056) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -128,6 +128,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_01_123129) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  create_table "view_counts", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "view_count"
+    t.index ["book_id"], name: "index_view_counts_on_book_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "book_comments", "books"
@@ -141,4 +149,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_01_123129) do
   add_foreign_key "sessions", "users"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
+  add_foreign_key "view_counts", "books"
 end

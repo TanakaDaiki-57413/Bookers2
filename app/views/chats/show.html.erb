@@ -13,15 +13,4 @@
   <% end %>
 </div>
 
-<div class="errors">
-  <% if @chat.errors.any? %>
-    <h1><%= @chat.errors.count %> errors prohibited this obj from being saved:</h1>
-    <ul class="ms-3">
-      <% @chat.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <%end%>
-    </ul>
-  <% end %>
-</div>
-
 <%= render "chats/form" , chat:@chat%>

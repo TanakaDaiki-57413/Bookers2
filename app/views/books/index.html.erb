@@ -19,9 +19,10 @@
           <thead>
             <tr>
               <th class="col-md-2"></th>
-              <th class="col-md-3">Title</th>
+              <th class="col-md-2">Title</th>
               <th class="col-md-2">Opinion</th>
-              <th class="col-md-2"></th>
+              <th class="col-md-1"></th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -42,6 +43,9 @@
                 </td>
                 <td>
                   <p>コメント数：<%= book.book_comments.count %></p>
+                </td>
+                <td>
+                  <p>閲覧数：<%= book.view_counts.pick(:view_count) %></p>
                 </td>
               </tr>
             <%end%>
